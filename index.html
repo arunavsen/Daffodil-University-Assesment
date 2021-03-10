@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Daffodil Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            margin-top: 70px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4 mb-5">Calculate Factorial, Fibonacci, Leap Year, Alphabetically order</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <input id="txt" type="text" class="form-control form-control-lg w-100" placeholder="Enter string..." />
+            </div>
+            <div class="col-md-2">
+                <select class="form-control form-control-lg" id="txtSelect">
+                    <option value="Fibonacci">Fibonacci</option>
+                    <option value="Factorial">Factorial</option>
+                    <option value="Leap Year">Leap Year</option>
+                    <option value="Alphabetically">Alphabetically</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input class="btn btn-primary btn-lg" type="button" value="Calculate" onclick="Calculation()">
+            </div>
+        </div>
+
+        <div id="output">
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="card bg-success p-4">
+                        <div class="card-block">
+                            <div class="card-text" id="result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+
+    <script>
+
+        // Hidden
+        document.getElementById('output').style.visibility = 'hidden';
+
+        // Leap Year
+        function leapYearCalculator(test) {
+            if ((test % 100 == 0) ? (test % 400 == 0) : (test % 4 == 0)) {
+                document.getElementById('result').innerText = "It is Leap Year";
+            } else {
+                document.getElementById('result').innerText = "It is not Leap Year";
+            }
+        }
+
+        // Fibonacci Number
+        function fibonacciCalculator(test) {
+            var n1 = 0, n2 = 1, nextTerm = n2;
+            var rr = [];
+            for (var i = 1; i < test; i++) {
+                rr.push(nextTerm);
+                nextTerm = n1 + n2;
+                n1 = n2;
+                n2 = nextTerm;
+            }
+            document.getElementById('result').innerText = rr;
+        }
+
+        // Factorial
+        function factorialCalculator(test) {
+            if (test < 0) {
+                document.getElementById('result').innerText = 'Error! Factorial for negative number does not exist.';
+            } else if (test === 0) {
+                document.getElementById('result').innerText = 'The factorial of ' + test + ' is 1.';
+            } else {
+                let fact = 1;
+                for (i = 1; i <= test; i++) {
+                    fact *= i;
+                }
+                document.getElementById('result').innerText = 'The factorial of is: ' + fact;
+            }
+        }
+
+        // Alphabetical Order
+        function alphabeticalOrder(test) {
+            document.getElementById('result').innerText = test.split('').sort().join('');
+        }
+
+        function Calculation() {
+            var dropdwn = document.getElementById('txtSelect').value;
+            var user = document.getElementById('txt').value;
+
+            document.getElementById('output').style.visibility = 'visible';
+
+            if (dropdwn == "Leap Year") {
+                leapYearCalculator(user);
+            } else if (dropdwn == "Fibonacci") {
+                fibonacciCalculator(user);
+            } else if (dropdwn == "Factorial") {
+                factorialCalculator(user);
+            } else if (dropdwn == "Alphabetically") {
+                alphabeticalOrder(user);
+            }
+
+        }
+    </script>
+</body>
+
+</html>
